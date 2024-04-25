@@ -1,1 +1,2 @@
-curl -s[URL]|shasum|read h;echo ${h:0:4}|xargs -I{} sh -c "awk 'NR==0x{}'/usr/share/dict/words|tr '\n' '-'|xargs -I{} test '{}'='word1-word2'&&sh"
+curl -s[URL]|shasum|read h;awk -v a="${h:0:2}" -v b="${h:3:2}" 'NR==a||NR==b{print}' /usr/share/dict/words|grep -q 'word1-word2'&&sh
+
