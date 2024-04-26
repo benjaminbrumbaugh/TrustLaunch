@@ -6,7 +6,7 @@ one_liner_template_url="https://raw.githubusercontent.com/manpoozle/trustlaunch/
 
 # Fetch the script and compute its hash
 script_content=$(curl -sS $script_url)
-script_hash=$(echo "$script_content" | shasum | awk '{print $1}')
+script_hash=$(curl -sS $script_url | shasum | awk '{print $1}')
 
 # Fetch the one-liner template
 one_liner_template=$(curl -sS $one_liner_template_url)
