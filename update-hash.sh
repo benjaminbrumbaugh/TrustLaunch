@@ -1,22 +1,21 @@
 #!/bin/bash
 
-# Path to the script file
-script_path="your_bootstrapping_script.sh"
+# URLs for the script and the one-liner template
+script_url="https://raw.githubusercontent.com/manpoozle/trustlaunch/main/ts.sh"
+one_liner_template_url="https://raw.githubusercontent.com/manpoozle/trustlaunch/main/trust_launch_template.sh"
 
-# Calculate new hash
-new_hash=$(shasum -a 256 $script_path | awk '{print $1}')
+# Fetch the script and compute its hash
+script_content=$(curl -sS $script_url)
+script_hash=$(echo "$script_content" | shasum | awk '{print $1}')
 
-# File containing the one-liner
-one_liner_file="tl.sh"
+# Fetch the one-liner template
+one_liner_template=$(curl -sS $one_liner_template_url)
 
-# Read the current one-liner
-current_one_liner=$(cat $one_liner_file)
+# Substituting the placeholders in the template with actual values
+# Assuming placeholders are {{URL}} for the script URL and {{EXPECTED_HASH_PREFIX}} for the hash
+one_liner=$(echo "$one_liner_template" | \
+            sed "s|{{URL}}|$script_url|g" | \
+            sed "s|{{EXPECTED_HASH_PREFIX}}|$script_hash|g")
 
-# Regex to match a SHA-256 hash or the placeholder 'known_good_hash'
-hash_regex="[a-f0-9]{64}|known_good_hash"
-
-# Replace the hash in the one-liner
-updated_one_liner=$(echo "$current_one_liner" | sed "s/$hash_regex/$new_hash/")
-
-# Write the updated one-liner back to the file
-echo "$updated_one_liner" > $one_liner_file
+# Print the processed one-liner
+echo "$one_liner"
