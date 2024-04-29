@@ -1,8 +1,7 @@
 #!/bin/bash
 
-# URLs for the script and the one-liner template
-script_url="https://raw.githubusercontent.com/manpoozle/trustlaunch/main/ts.sh"
-one_liner_template_url="https://raw.githubusercontent.com/manpoozle/trustlaunch/main/trust_launch_template.sh"
+# Source configuration variables
+source config.sh
 
 # Fetch the script and compute its hash
 script_content=$(curl -sS $script_url)
@@ -19,3 +18,4 @@ one_liner=$(echo "$one_liner_template" | \
 
 # Print the processed one-liner
 echo "$one_liner"
+
