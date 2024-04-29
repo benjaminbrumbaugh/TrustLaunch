@@ -1,1 +1,4 @@
-s=$(curl -s https://raw.githubusercontent.com/manpoozle/trustlaunch/main/ts.sh); shasum <<< "$s" | cut -d' ' -f1 | grep -q '^78fb38f212fa49029aff24c669a39648d9b4e68b' && sh <<< "$s" || { echo "Stale launch script. Stopping." >&2; false; }
+echo "This is a boostrapping script."
+echo "We're going to install Homebrew."
+echo "We're going to install Ansible."
+echo "You can go get some coffee ☕, we'll take it from here."
