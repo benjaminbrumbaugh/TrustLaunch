@@ -1,6 +1,11 @@
 # TrustLaunch
 Welcome to TrustLaunch, a project for generating one-liners that can safely boostrap most UNIX systems (macOS, Linux, etc.) through, wait for it, remote code exectution. Remote code execution is an inherrently unsafe operation, so a TrustLaunch project bounds the attack vectors available such that we do so responsibly in most contexts. The goal here is to provide a level of security high enough that this is a poor choice for a bad actor seeking to compromise you or your instituion. Mustering the resources it takes to compromise a TrustLaunch project need be out of the reach of individuals and most organizations, and simply not worth it for the largest instituions that can focus their attention on more effective strategies, like for instance, phishing. To learn more, check out the [Security](#Security) section.
 
+# Command Breakdown
+We need a source of consistent and static human-readable text we know we can find on any bare-bones UNIX system. This is actually an almost intractible problem. The best options are wordlists, man pages, and license files. Unfortunately, wordlists are highly inconsistent across UNIX distros. License files are better, but the disincentives for updating a core UNIX command are even greater than a license. Larger bodies of unique text give us a better source of entropy for a checksum, so we favor the most fundamental and largest man pages we can find, and limit our search to only ones that haven't seen updates in decades. We then use the following tight one-linerto pull the unique words from our body of text to use as a source for a human-readable checksum. 
+```man ls|grep -o '\b[a-z]\{3,\}\b'|sort -u```
+
+
 # Self-Referencial
 This TrustLaunch repository is a TrustLaunch project. You can create your own TrustLaunch project by cloning this down normally, or running this TrustLaunch one-liner.
 ```Coming Soon```
