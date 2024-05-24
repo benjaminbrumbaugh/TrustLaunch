@@ -1,8 +1,9 @@
 # TrustLaunch
-Welcome to TrustLaunch, a project for generating one-liners that can safely boostrap a fresh UNIX system through, wait for it, remote code exectution.
+Welcome to TrustLaunch, a project for generating one-liners that can safely boostrap most UNIX systems (macOS, Linux, etc.) through, wait for it, remote code exectution. Remote code execution is an inherrently unsafe operation, so a TrustLaunch project bounds the attack vectors available such that we do so responsibly in most contexts. The goal here is to provide a level of security high enough that this is a poor choice for a bad actor seeking to compromise you or your instituion. Mustering the resources it takes to compromise a TrustLaunch project need be out of the reach of individuals and most organizations, and simply not worth it for the largest instituions that can focus their attention on more effective strategies, like for instance, phishing. To learn more, check out the [Security](#Security) section.
 
 # Self-Referencial
-TrustLaunch project is a consumer of TrustLaunch project. You can get started by cloning this project down, or running this TrustLaunch. 
+This TrustLaunch repository is a TrustLaunch project. You can create your own TrustLaunch project by cloning this down normally, or running this TrustLaunch one-liner.
+```Coming Soon```
 
 # Caching delays
 Just a note, caching layers between the user and the script repository will cause a delay between you updating the script and the new one-liner pulling it. This means after pulling a previous script, if you update it in your repository, and immediatly test the new one-liner, you will likely pull the previous script from the cache until it times out. I've seen this take as long as 30 seconds. In an automated deployment setting, or a tight test loop, or your own rapid-fire iteration with your aderol doped lightning fingers, you might run into this. So remember to account for it. If your consumers are humans, they are not likely running your repository script back-to-back repeatedly within the caching window, so it's unlikely to affect them. If your consumers are machines, the script will return a non-zero status code on failure, so you can sleep and retry if you like.
